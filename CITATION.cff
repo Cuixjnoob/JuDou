@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "TinyJudou-1.2M LongMix"
+message: "If you use this dataset, please cite the TinyJudou dataset release and the original source corpora where applicable."
+type: dataset
+version: "v1.0.0-draft"
+date-released: "2026-06-21"
+authors:
+  - name: "TinyJudou Contributors"
+abstract: "A 1.2M-record classical Chinese slash-segmentation dataset with paired segmented and unsegmented text."
+keywords:
+  - classical Chinese
+  - wenyan
+  - segmentation
+  - judou
+  - punctuation
+license: "see LICENSE_DATA.md"
