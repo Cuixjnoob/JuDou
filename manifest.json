@@ -1,0 +1,83 @@
+{
+  "dataset_name": "TinyJudou-1.2M LongMix",
+  "version": "v1.0.0-draft",
+  "created_for": "classical Chinese slash segmentation (/ judou) research and training",
+  "record_count": 1200000,
+  "asset": {
+    "filename": "tinyjudou_1200k_longmix_v1.json.tar.gz",
+    "format": "tar.gz containing JSON list",
+    "size_bytes": 521130562,
+    "sha256": "81261caa9be9d297f7c86ebf6e5131dec13c2529200f9698fb83fac24c0a2bc4",
+    "members": [
+      {
+        "name": "tiny_judou_training_database_1200k_longmix.json",
+        "size": 2704402637
+      }
+    ]
+  },
+  "schema": {
+    "id_field": "training_id",
+    "required_text_fields": [
+      "segmented",
+      "unsegmented"
+    ],
+    "metadata_fields": [
+      "source",
+      "license",
+      "book",
+      "group",
+      "source_file",
+      "primary_source_name",
+      "primary_tier",
+      "primary_path",
+      "source_refs"
+    ],
+    "quality_flags": [
+      "usable_for_training",
+      "usable_for_semantic_pretraining",
+      "usable_for_slash_training_strict"
+    ],
+    "validation": "segmented.replace(\"/\", \"\") == unsegmented for every record"
+  },
+  "validation_summary": {
+    "rows": 1200000,
+    "has_slash_in_segmented": 1200000,
+    "segmented_unsegmented_match": 1200000,
+    "usable_for_semantic_pretraining": 1200000,
+    "usable_for_slash_training_strict": 450000
+  },
+  "distributions": {
+    "source_counts": {
+      "niutrans": 533835,
+      "gujilab_punctuate": 533300,
+      "": 122208,
+      "cctc": 10633,
+      "wikisource": 24
+    },
+    "license_counts": {
+      "MIT": 544468,
+      "CC0-1.0": 533300,
+      "": 122208,
+      "CC BY-SA or public domain, check page": 24
+    },
+    "primary_tier_counts": {
+      "candidate_raw_broad": 325346,
+      "candidate_raw_mid_short_extra_1000k": 271702,
+      "train_ready_promoted_candidate": 257808,
+      "candidate_raw_long_article": 150000,
+      "train_ready_base": 85000,
+      "train_ready_long_article": 50000,
+      "train_ready_hard": 20000,
+      "train_ready_mined_hard": 19984,
+      "legacy_train_ready": 7500,
+      "train_ready_night_approved": 6017,
+      "train_ready_dynamic_approved": 3558,
+      "candidate_raw_long_extra_1000k": 1185,
+      "candidate_raw_long": 950,
+      "candidate_raw_long_extra": 817,
+      "legacy_probe_source": 100,
+      "train_ready_textbook_tangsong": 33
+    }
+  },
+  "license_note": "Derived from multiple open/local corpora. Record-level source/license metadata is preserved when available. Some records have empty license fields inherited from intermediate local datasets and require source-level verification before commercial redistribution."
+}
