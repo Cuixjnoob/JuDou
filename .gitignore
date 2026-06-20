@@ -1,0 +1,5 @@
+release_assets/*.tar.gz
+release_assets/*.zip
+release_assets/*.json
+release_assets/*.jsonl
+release_assets/*.gz
