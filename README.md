@@ -1,21 +1,28 @@
+
 # TinyJudou-1.2M LongMix
 
-TinyJudou-1.2M LongMix is a classical Chinese slash-segmentation dataset for training models that map unpunctuated classical Chinese text to a canonical `/`-segmented form.
+TinyJudou-1.2M LongMix is a classical Chinese slash-segmentation dataset for training models that convert unpunctuated classical Chinese text into a canonical `/`-segmented form.
 
-Each record contains both:
+The dataset is designed for research and engineering experiments on **文言文 `/` 断句** (中国人在这里就用中文）, especially character-level or span-level segmentation models.
 
-- `segmented`: classical Chinese text with phrase/sentence boundaries represented by `/`
-- `unsegmented`: the same text with `/` removed
+Each record contains two aligned text fields:
 
-The full dataset has **1,200,000 records**. It is intended for research and engineering experiments on 文言文 `/` 断句.
+- `segmented`: classical Chinese text with phrase or sentence boundaries marked by `/`
+- `unsegmented`: the same text with all `/` markers removed
 
-## Full Dataset
+The full release contains **1,200,000 records**.
 
-The full data asset should be uploaded to a GitHub Release, not committed directly to the repository:
+---
+
+## Dataset Asset
+
+The full dataset should be distributed as a GitHub Release asset rather than committed directly to the repository.
+
+Release asset:
 
 ```text
 tinyjudou_1200k_longmix_v1.json.tar.gz
-```
+````
 
 Asset size:
 
@@ -29,9 +36,11 @@ SHA256:
 81261caa9be9d297f7c86ebf6e5131dec13c2529200f9698fb83fac24c0a2bc4
 ```
 
-## Schema
+---
 
-Important fields:
+## Data Schema
+
+Each record is a JSON object. Important fields include:
 
 ```json
 {
@@ -47,17 +56,35 @@ Important fields:
 }
 ```
 
-Validation invariant:
+Field meanings:
+
+* `training_id`: unique record identifier
+* `segmented`: canonical slash-segmented text
+* `unsegmented`: input text with all slash markers removed
+* `length`: character length of `unsegmented`
+* `slash_count`: number of `/` markers in `segmented`
+* `book`: source book or text collection when available
+* `source_file`: original source path when available
+* `source`: upstream corpus or data source
+* `license`: record-level license metadata when available
+
+---
+
+## Validation Invariant
+
+For every record in this release, the following invariant holds:
 
 ```python
 record["segmented"].replace("/", "") == record["unsegmented"]
 ```
 
-This invariant holds for all 1,200,000 records in this release.
+This invariant has been checked for all **1,200,000** records.
 
-## Quick Use
+---
 
-Download the Release asset and verify:
+## Quick Start
+
+Download the GitHub Release asset and verify its checksum:
 
 ```bash
 python scripts/download_and_verify.py \
@@ -67,7 +94,7 @@ python scripts/download_and_verify.py \
   --extract-dir data/
 ```
 
-Load the extracted JSON:
+Load the extracted JSON file:
 
 ```python
 import json
@@ -80,12 +107,33 @@ print(rows[0]["segmented"])
 print(rows[0]["unsegmented"])
 ```
 
-## License And Source Notes
+---
 
-This dataset is derived from multiple open/local classical Chinese corpora. Record-level source and license metadata is preserved when available. Some records have empty license fields inherited from intermediate local datasets and require source-level verification before commercial redistribution.
+## Intended Use
 
-See [LICENSE_DATA.md](LICENSE_DATA.md) for details.
+TinyJudou-1.2M LongMix is intended for:
+
+* classical Chinese slash segmentation
+* 文言文 `/` 断句 model training
+* character-level and span-level segmentation experiments
+* structured prediction models such as boundary classifiers, CRF models, Semi-CRF models, and sequence encoders
+* evaluation of segmentation robustness across books, genres, and source collections
+
+The dataset is not intended to define a universal punctuation standard. The `/` markers represent the canonical segmentation style used in this dataset release.
+
+---
+
+## License and Source Notes
+
+This dataset is derived from multiple open or local classical Chinese corpora. Record-level source and license metadata is preserved when available.
+
+Some records may have empty license fields inherited from intermediate local datasets. These records require source-level verification before commercial redistribution.
+
+See [LICENSE_DATA.md](LICENSE_DATA.md) for detailed source and license notes.
+
+---
 
 ## Citation
 
-See [CITATION.cff](CITATION.cff).
+If you use this dataset, please cite it using the metadata in [CITATION.cff](CITATION.cff).
+
